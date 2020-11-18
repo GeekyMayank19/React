@@ -1,13 +1,19 @@
-import { Avatar, List, ListItem, ListItemAvatar, ListItemText } from '@material-ui/core'
+import { Button, List, ListItem,  ListItemText } from '@material-ui/core'
 import React from 'react'
 import './Todo.css'
+import db from './firebase'
+import DeleteIcon from '@material-ui/icons/Delete';
 function Todo(props) {
+
+
     return (
         <List className="todo__list">
             <ListItem>
               
-                <ListItemText primary={props.text} secondary="Dummy deadline  "/>
+                <ListItemText primary={props.todo.todo} secondary="Dummy deadline  "/>
             </ListItem>
+            <DeleteIcon onClick={event =>db.collection('todos').doc(props.todo.id).delete()}
+                >Delete Me</DeleteIcon>
              {/* <li>{props.text }</li> */}
         </List>
     )

@@ -18,7 +18,7 @@ function App() {
   /// this code here.. fires when the app.js loads
   db.collection('todos').orderBy('timestamp','desc').onSnapshot(snapshot =>{
     // console.log(snapshot.docs.map(doc => doc.data()))
-    setTodos(snapshot.docs.map(doc => doc.data().todo))// this allow to read the data from data base and add into setTodos
+    setTodos(snapshot.docs.map(doc => ({id:doc.id ,todo:doc.data().todo})))// this allow to read the data from data base and add into setTodos
   })
  }, [])
 
@@ -56,7 +56,7 @@ function App() {
       
       <ul>
         {todos.map(todo =>(
-          <Todo text={todo}/>
+          <Todo todo={todo}/>
           // <li>{todo }</li>
         ))}
        
@@ -67,3 +67,5 @@ function App() {
 
 
 export default App;
+
+///Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
