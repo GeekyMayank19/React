@@ -1,0 +1,19 @@
+*{
+  /* this is used to set the top margin 0 */
+  margin: 0;
+}
+.app{
+  background-color: #fafafa;
+  
+}
+.app__header{
+  background-color: white;
+  padding: 20px;
+  object-fit: contain;
+  border-bottom: 1px solid lightgray;
+}
+.app__singup{
+  display: flex;
+  flex-direction: column;
+  
+}
