@@ -1,0 +1,30 @@
+
+
+.searchInput:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+
+ .loginButton{
+    outline: none;
+    box-shadow: none;
+ }
+
+ button.login{
+    background-color: #E1ECF4;
+ }
+ .login:hover{
+    background-color: #B2D2EA;
+ }
+
+ button.logout{
+    background-color: #0B94FF;
+ }
+ .logout:hover{
+    background-color: #0074CC;
+ }
+
+ .hoverIcons:hover {
+   background-color: #E3E6E8;
+}
