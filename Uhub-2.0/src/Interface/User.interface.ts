@@ -19,9 +19,7 @@ export interface IUserFormLoginValue {
 }
 
 export interface IUserRegisterData {
-  name: string;
+  fullname: string;
   email: string;
   password: string;
-  confirmPassword: string;
-  acceptTerms: boolean;
 }

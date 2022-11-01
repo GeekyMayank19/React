@@ -1,28 +1,32 @@
 import React from "react";
 
-
-const PublicMenu = () => {
+const ProfileMenu = () => {
   return (
     <div>
       <div
-        className="public-menu home-icon"
+        className="profile-menu home-icon"
         style={{
           padding: "8px",
           fontSize: "13px",
           marginLeft: "10px",
           borderRadius: "1px solid black",
         }}
+        onClick={() => {
+          console.log("click");
+          // setIsActive(true);
+          //   setIsSubmenuActive(true);
+        }}
       >
-        Notes
+        Edit
       </div>
       <div
-        className="public-menu home-icon"
+        className="profile-menu home-icon"
         style={{ padding: "8px", fontSize: "13px", marginLeft: "10px" }}
       >
-        Sample Paper
+        My Posts
       </div>
       <div
-        className="public-menu home-icon"
+        className="profile-menu home-icon"
         style={{ padding: "8px", fontSize: "13px", marginLeft: "10px" }}
       >
         Ebooks
@@ -31,4 +35,4 @@ const PublicMenu = () => {
   );
 };
 
-export default PublicMenu;
+export default ProfileMenu;

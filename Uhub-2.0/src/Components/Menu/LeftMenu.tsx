@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./LeftMenu.css";
+import ProfileMenu from "./ProfileMenu";
 import PublicMenu from "./PublicMenu";
 const LeftMenu = () => {
   const [isActive, setIsActive] = useState(false);
+  const [isSubmenuActive, setIsSubmenuActive] = useState(false);
   const location = useLocation();
+
   return (
     <div
       style={{
         width: "13.5%",
         justifyContent: "flex-end",
-        // padding: 10,
         flexDirection: "row",
-        // display:'flex',
       }}
     >
-      {/* <div style={{ border: "1px solic black", width: "50px" }}>asdf</div> */}
       <div
         style={{
           minWidth: "64.5%",
@@ -43,14 +43,31 @@ const LeftMenu = () => {
             padding: "8px",
             fontSize: "14px",
             fontWeight: "600",
-            background: isActive ? "#E3E6E8" : "white",
+            // background: isActive ? "#E3E6E8" : "white",
             marginTop: "2px",
           }}
-          onClick={() => setIsActive(!isActive)}
         >
           Public
         </div>
-        {isActive && <PublicMenu />}
+
+        <PublicMenu />
+
+        <div
+          className="home-icon"
+          style={{
+            padding: "8px",
+            fontSize: "14px",
+            fontWeight: "600",
+            // background: isActive ? "#E3E6E8" : "white",
+            marginTop: "2px",
+          }}
+          onClick={() => {
+            setIsActive(!isActive);
+          }}
+        >
+          Profile
+        </div>
+        {isActive && <ProfileMenu />}
       </div>
     </div>
   );

@@ -2,73 +2,40 @@ import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
-<<<<<<< HEAD
 import GoogleIcon from "@mui/icons-material/Google";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { AuthContext } from "../../Context/AuthContext";
-import urls from "../../utility/urls";
-=======
->>>>>>> parent of b24b831 (singup page ui created)
+import { userService } from "../../Services";
+import { Link } from "react-router-dom";
+import { IUserRegisterData } from "../../Interface";
 
 type UserSubmitForm = {
   fullname: string;
-  // username: string;
   email: string;
   password: string;
-  confirmPassword: string;
-  acceptTerms: boolean;
 };
 
 const Register = () => {
   const authContext = useContext(AuthContext);
   const validationSchema = Yup.object().shape({
     fullname: Yup.string().required("Fullname is required"),
-    // username: Yup.string()
-    //   .required("Username is required")
-    //   .min(6, "Username must be at least 6 characters")
-    //   .max(20, "Username must not exceed 20 characters"),
     email: Yup.string().required("Email is required").email("Email is invalid"),
     password: Yup.string()
       .required("Password is required")
       .min(6, "Password must be at least 6 characters")
       .max(40, "Password must not exceed 40 characters"),
-    confirmPassword: Yup.string()
-      .required("Confirm Password is required")
-      .oneOf([Yup.ref("password"), null], "Confirm Password does not match"),
     acceptTerms: Yup.bool().oneOf([true], "Accept Terms is required"),
   });
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<UserSubmitForm>({
+  } = useForm<IUserRegisterData>({
     resolver: yupResolver(validationSchema),
   });
-  const onSubmit = async (data: UserSubmitForm) => {
-    console.log(JSON.stringify(data, null, 2));
-    debugger; // eslint-disable-line
-    // authContext.register(data);
-    fetch(urls.register, {
-      method: "POST",
-      body: JSON.stringify({
-        email: data.email,
-        password: data.password,
-        returnSecureToken: true,
-      }),
-      headers: {
-        "Content-Type": "application",
-      },
-    }).then((res: any) => {
-      if (res.ok) {
-        // setToken(res.idToken)
-        console.log(res.idToken);
-      } else {
-        return res.json().then((data: any) => {
-          console.log(data);
-        });
-      }
-    });
+  const onSubmit = (data: IUserRegisterData) => {
+    userService.register(data);
   };
 
   return (
@@ -77,109 +44,202 @@ const Register = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        border: "1px solid black",
+        height: `calc(100vh - ${"50px"})`,
+        backgroundColor: "#F5F5F5",
         padding: "20px",
-        background: "#F8F8F8",
-        height: `calc(100vh - ${"270px"})`,
+        width: "100vw",
       }}
     >
       <div
-        // className="register-form"
+        className="register-form"
         style={{
           width: "400px",
           backgroundColor: "#FFFFFF",
           padding: "15px",
-          borderRadius: "10px",
+          borderRadius: "20px",
         }}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <label style={{ fontWeight: "600" }}>Display name</label>
-            <input
-              type="text"
-              {...register("fullname")}
-              className={`form-control ${errors.fullname ? "is-invalid" : ""}`}
-            />
-            <div className="invalid-feedback">{errors.fullname?.message}</div>
-          </div>
-
-          {/* <div className="form-group">
-            <label>Username</label>
-            <input
-              type="text"
-              {...register("username")}
-              className={`form-control ${errors.username ? "is-invalid" : ""}`}
-            />
-            <div className="invalid-feedback">{errors.username?.message}</div>
-          </div> */}
-
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              type="text"
-              {...register("email")}
-              className={`form-control ${errors.email ? "is-invalid" : ""}`}
-            />
-            <div className="invalid-feedback">{errors.email?.message}</div>
-          </div>
-
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              type="password"
-              {...register("password")}
-              className={`form-control ${errors.password ? "is-invalid" : ""}`}
-            />
-            <div className="invalid-feedback">{errors.password?.message}</div>
-          </div>
-          <div className="form-group">
-            <label>Confirm Password</label>
-            <input
-              type="password"
-              {...register("confirmPassword")}
-              className={`form-control ${
-                errors.confirmPassword ? "is-invalid" : ""
-              }`}
-            />
-            <div className="invalid-feedback">
-              {errors.confirmPassword?.message}
-            </div>
-          </div>
-
-          <div className="form-group form-check">
-            <input
-              type="checkbox"
-              {...register("acceptTerms")}
-              className={`form-check-input ${
-                errors.acceptTerms ? "is-invalid" : ""
-              }`}
-            />
-            <label htmlFor="acceptTerms" className="form-check-label">
-              I have read and agree to the Terms
-            </label>
-            <div className="invalid-feedback">
-              {errors.acceptTerms?.message}
-            </div>
-          </div>
-
           <div
-            className="form-group"
             style={{
               display: "flex",
               justifyContent: "center",
-              marginTop: "20px",
+              fontWeight: "500",
+              flexDirection: "column",
+              alignItems: "center",
             }}
           >
-            <button type="submit" className="btn btn-primary">
-              Register
-            </button>
-            {/* <button
-              type="button"
-              onClick={() => reset()}
-              className="btn btn-warning float-right"
+            <h4>Register</h4>
+            <div>Hey, Enter your detail to create</div>
+            <div> account</div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              marginTop: "25px",
+            }}
+          >
+            <div>
+              <input
+                {...register("fullname")}
+                className={`form-control ${errors.email ? "is-invalid" : ""}`}
+                style={{
+                  width: "325px",
+                  borderRadius: "5px",
+                  padding: "5px",
+                  border: "1px solid 		#DCDCDC",
+                  marginTop: "10px",
+                  paddingLeft: "15px",
+                }}
+                placeholder="Full Name"
+                type="text"
+              />
+              <div className="invalid-feedback">{errors.email?.message}</div>
+            </div>
+            <div>
+              <input
+                {...register("email")}
+                className={`form-control ${errors.email ? "is-invalid" : ""}`}
+                style={{
+                  width: "325px",
+                  borderRadius: "5px",
+                  padding: "5px",
+                  border: "1px solid 		#DCDCDC",
+                  marginTop: "10px",
+                  paddingLeft: "15px",
+                }}
+                placeholder="Enter Email"
+                type="text"
+              />
+              <div className="invalid-feedback">{errors.email?.message}</div>
+            </div>
+            <div>
+              <input
+                type="password"
+                {...register("password")}
+                className={`form-control ${
+                  errors.password ? "is-invalid" : ""
+                }`}
+                style={{
+                  width: "325px",
+                  borderRadius: "5px",
+                  padding: "5px",
+                  border: "1px solid 		#DCDCDC",
+                  marginTop: "10px",
+                  paddingLeft: "15px",
+                }}
+                placeholder="Password"
+              />
+              <div className="invalid-feedback">{errors.password?.message}</div>
+            </div>
+            <div
+              style={{
+                width: "325px",
+                marginTop: "5px",
+                fontWeight: "500",
+              }}
             >
-              Reset
-            </button> */}
+              having trouble in sign in?
+            </div>
+            <button
+              type="submit"
+              style={{
+                border: "1px solid #0B94FF",
+                backgroundColor: "#0B94FF",
+                borderRadius: "4px",
+                color: "white",
+                fontSize: "14px",
+                fontWeight: "500",
+                marginTop: "25px",
+                width: "300px",
+                height: "33px",
+              }}
+            >
+              Sign Up
+            </button>
+            <div
+              style={{
+                // width: "320px",
+                marginTop: "20px",
+                fontWeight: "500",
+              }}
+            >
+              --Or Sign up with--
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: "25px",
+              }}
+            >
+              <div
+                style={{
+                  padding: "6px",
+                  border: "1px solid #DCDCDC",
+                  width: "110px",
+                  display: "flex",
+                  justifyContent: "center",
+                  borderRadius: "5px",
+                  alignItems: "center",
+                  marginRight: "5px",
+                  cursor: "pointer",
+                }}
+              >
+                <GoogleIcon fontSize="medium" />
+                <div style={{ marginLeft: "5px", fontWeight: "700" }}>
+                  Google
+                </div>
+              </div>
+              <div
+                style={{
+                  padding: "5px",
+                  border: "1px solid #DCDCDC",
+                  width: "112px",
+                  display: "flex",
+                  justifyContent: "center",
+                  borderRadius: "5px",
+                  alignItems: "center",
+                  marginRight: "5px",
+                  cursor: "pointer",
+                }}
+              >
+                <FacebookRoundedIcon fontSize="medium" />
+                <div style={{ marginLeft: "5px", fontWeight: "700" }}>
+                  Facebook
+                </div>
+              </div>
+              <div
+                style={{
+                  padding: "5px",
+                  border: "1px solid #DCDCDC",
+                  width: "110px",
+                  display: "flex",
+                  justifyContent: "center",
+                  borderRadius: "5px",
+                  alignItems: "center",
+                  marginRight: "5px",
+                  cursor: "pointer",
+                }}
+              >
+                <LinkedInIcon fontSize="medium" />
+                <div style={{ marginLeft: "5px", fontWeight: "700" }}>
+                  LinkedIn
+                </div>
+              </div>
+            </div>
+            <div
+              style={{
+                marginTop: "20px",
+                fontWeight: "500",
+              }}
+            >
+              already have account?
+              <Link to="/auth/login">login</Link>
+            </div>
           </div>
         </form>
       </div>

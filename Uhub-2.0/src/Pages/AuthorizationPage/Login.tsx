@@ -7,6 +7,7 @@ import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import url from "../../utility/urls";
 import { AuthContext } from "../../Context/AuthContext";
+import { Link } from "react-router-dom";
 
 type UserSubmitForm = {
   email: string;
@@ -217,7 +218,8 @@ const Login = () => {
                 fontWeight: "500",
               }}
             >
-              Don't have an account? Register Now
+              Don't have an account?
+              <Link to="/auth/register">Register Now</Link>
             </div>
           </div>
         </form>
