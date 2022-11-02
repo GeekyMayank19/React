@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const ProfileMenu = () => {
+  const navigate = useNavigate();
   return (
     <div>
       <div
@@ -11,13 +13,9 @@ const ProfileMenu = () => {
           marginLeft: "10px",
           borderRadius: "1px solid black",
         }}
-        onClick={() => {
-          console.log("click");
-          // setIsActive(true);
-          //   setIsSubmenuActive(true);
-        }}
+        onClick={() => navigate("/profile")}
       >
-        Edit
+        Profile
       </div>
       <div
         className="profile-menu home-icon"

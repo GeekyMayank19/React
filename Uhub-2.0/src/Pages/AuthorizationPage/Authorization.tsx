@@ -5,7 +5,7 @@ import Register from "./Register";
 
 function Authorization() {
   return (
-    <div className="auth-container" >
+    <div className="auth-container">
       <Routes>
         <Route path={`register`} element={<Register />} />
         <Route path={`login`} element={<Login />} />

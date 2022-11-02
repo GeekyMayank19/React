@@ -1,17 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthContext";
 import "./LeftMenu.css";
 import ProfileMenu from "./ProfileMenu";
 import PublicMenu from "./PublicMenu";
 const LeftMenu = () => {
   const [isActive, setIsActive] = useState(false);
-  const [isSubmenuActive, setIsSubmenuActive] = useState(false);
   const location = useLocation();
-
+  const authContext = useContext(AuthContext);
+  // authContext.isLoggedIn
+  // console.log(authContext);
   return (
     <div
       style={{
-        width: "13.5%",
+        // border: "1px solid black",
+        // width: "11.5%",
+        width: "140px",
         justifyContent: "flex-end",
         flexDirection: "row",
       }}
@@ -43,7 +47,7 @@ const LeftMenu = () => {
             padding: "8px",
             fontSize: "14px",
             fontWeight: "600",
-            // background: isActive ? "#E3E6E8" : "white",
+            background: location.pathname === "/public" ? "#E3E6E8" : "white",
             marginTop: "2px",
           }}
         >
@@ -52,22 +56,26 @@ const LeftMenu = () => {
 
         <PublicMenu />
 
-        <div
-          className="home-icon"
-          style={{
-            padding: "8px",
-            fontSize: "14px",
-            fontWeight: "600",
-            // background: isActive ? "#E3E6E8" : "white",
-            marginTop: "2px",
-          }}
-          onClick={() => {
-            setIsActive(!isActive);
-          }}
-        >
-          Profile
-        </div>
-        {isActive && <ProfileMenu />}
+        {authContext.isLoggedIn && (
+          <div>
+            <div
+              className="home-icon"
+              style={{
+                padding: "8px",
+                fontSize: "14px",
+                fontWeight: "600",
+                // background: isActive ? "#E3E6E8" : "white",
+                marginTop: "2px",
+              }}
+              onClick={() => {
+                setIsActive(!isActive);
+              }}
+            >
+              User
+            </div>
+            {isActive && <ProfileMenu />}
+          </div>
+        )}
       </div>
     </div>
   );

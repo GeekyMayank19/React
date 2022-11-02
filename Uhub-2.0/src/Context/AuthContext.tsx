@@ -16,7 +16,7 @@ interface IAuthContext {
   register: (data: IUserRegisterData) => void;
   login: () => void;
 }
-const AuthContext = createContext({
+const AuthContext = React.createContext<IAuthContext>({
   token: "",
   isLoggedIn: false,
   register: () => {},
@@ -26,9 +26,8 @@ const AuthContext = createContext({
 });
 
 export const AuthContextProvider: FC<any> = ({ children }): any => {
-  const [token, setToken] = useState(null);
-  const [isLoggedIn, setILoggedIn] = useState(false);
-  debugger; // eslint-disable-line
+  const [token, setToken] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const handleRegister = (data: IUserRegisterData) => {
     debugger; // eslint-disable-line
     console.log("url", url.register);
@@ -57,17 +56,16 @@ export const AuthContextProvider: FC<any> = ({ children }): any => {
   const handleLogin = () => {
     console.log("login handler ");
   };
+
   const contextValue = {
     token: token,
-    isLoggedIn: false,
-    register: handleRegister,
+    isLoggedIn: isLoggedIn,
+    register: () => handleRegister,
     login: handleLogin,
   };
 
   return (
-    <AuthContext.Provider value={contextValue as any}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
   );
 };
 
