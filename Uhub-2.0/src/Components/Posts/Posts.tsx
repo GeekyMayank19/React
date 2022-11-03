@@ -6,13 +6,11 @@ const Posts = () => {
   return (
     <div
       style={{
+        border: "1px solid black",
         display: "flex",
-        // border: "1px solid black",
-        width: "83%",
         justifyContent: "center",
         padding: "10px",
         flexDirection: "row",
-        borderLeft: "1px solid #C8C8C8",
       }}
     >
       <PostLeft />

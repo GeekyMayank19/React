@@ -44,7 +44,7 @@ const NavBar = () => {
             flexDirection: "row",
             alignItems: "center",
             cursor: "pointer",
-            marginLeft: "10%",
+            marginLeft: "8%",
           }}
         >
           <div
@@ -84,7 +84,7 @@ const NavBar = () => {
             border: "1px solid #BBBFC5",
             borderRadius: "5px",
             marginLeft: "10px",
-            width: "50%",
+            width: "100%",
           }}
         >
           <div style={{ color: "#838C95" }}>

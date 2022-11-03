@@ -4,33 +4,40 @@ import { AuthContext } from "../Context/AuthContext";
 import Footer from "./Footer/Footer";
 import LeftMenu from "./Menu/LeftMenu";
 import NavBar from "./NavBar/NavBar";
-import PostLeft from "./Posts/PostLeft";
-import Posts from "./Posts/Posts";
-import PostsRight from "./Posts/PostsRight";
 
 const Container = () => {
   const authContext = useContext(AuthContext);
   const location = useLocation();
-  return (
-    <div
-      style={{
-        position: "relative",
-      }}
-    >
-      <NavBar />
-      <div>
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <div style={{ display: "flex", maxWidth: "86%" }}>
-            <LeftMenu />
-            <Posts />
-          </div>
-        </div>
-        <Footer />
-      </div>
 
+  return (
+    <div>
+      <NavBar />
+      {(location.pathname === "/auth/login" ||
+        location.pathname === "/auth/register") && <Outlet />}
+      {location.pathname !== "/auth/login" &&
+        location.pathname !== "/auth/register" && (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <LeftMenu />
+            <div
+              style={{
+                height: "100%",
+                width: "75vw",
+                borderLeft: "1px solid #C8C8C8",
+                minHeight: `calc(100vh - ${"270px"})`,
+              }}
+            >
+              <Outlet />
+            </div>
+          </div>
+        )}
       <div style={{ position: "relative", bottom: 0, width: "100%" }}>
-        {authContext?.isLoggedIn &&
-          location.pathname !== ("/login" || "/register") && <Footer />}
+        {location.pathname !== "/auth/login" &&
+          location.pathname !== "/auth/register" && <Footer />}
       </div>
     </div>
   );

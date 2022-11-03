@@ -1,7 +1,6 @@
 import React from "react";
 import Post from "./Post";
 
-
 const PostLeft = () => {
   return (
     <div
@@ -12,7 +11,7 @@ const PostLeft = () => {
         padding: "10px",
       }}
     >
-      <div
+      {/* <div
         style={{
           display: "flex",
           flexDirection: "row",
@@ -31,19 +30,21 @@ const PostLeft = () => {
             paddingBottom: "4px",
             paddingLeft: "10px",
             paddingRight: "10px",
-            width:"60px",
-            fontWeight:"700px"
+            width: "60px",
+            fontWeight: "700px",
           }}
         >
           Post
         </button>
-      </div>
-      <Post/>
-      <Post/>
-      <Post/>
-      <Post/>
-      <Post/>
-      <Post/>
+      </div> */}
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
+      <Post />
     </div>
   );
 };

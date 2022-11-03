@@ -15,10 +15,12 @@ const Footer = () => {
         flexDirection: "row",
         padding: "35px",
         justifyContent: "space-around",
-        // position: "fixed",
+        position: "relative",
         // bottom: 0,
         // width: "100%",
         zIndex: 100,
+        left: 0,
+        bottom: 0,
       }}
     >
       <div
