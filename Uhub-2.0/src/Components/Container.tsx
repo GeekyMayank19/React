@@ -28,6 +28,7 @@ const Container = () => {
                 height: "100%",
                 width: "75vw",
                 borderLeft: "1px solid #C8C8C8",
+                borderRight:'1px solid #C8C8C8',
                 minHeight: `calc(100vh - ${"270px"})`,
               }}
             >
