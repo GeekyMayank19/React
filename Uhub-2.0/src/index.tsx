@@ -8,6 +8,7 @@ import Container from "./Components/Container";
 import { AuthContextProvider } from "./Context/AuthContext";
 import Profile from "./Pages/AuthorizationPage/Profile";
 import Posts from "./Components/Posts/Posts";
+import Addpost from "./Pages/Addpost";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
@@ -20,6 +21,7 @@ root.render(
             <Route path="auth/*" element={<Authorization />} />
             <Route path="home" element={<Posts />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="addpost" element={<Addpost />} />
           </Route>
         </Routes>
       </AuthContextProvider>

@@ -7,7 +7,7 @@ const Profile = () => {
   const [value, setValue] = useState("");
 
   return (
-    <div>
+    <div style={{paddingLeft:'15px'}}>
       <div
         style={{
           padding: "10px",
@@ -16,6 +16,7 @@ const Profile = () => {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
+          marginTop:'10px'
         }}
       >
         <div
@@ -134,7 +135,7 @@ const Profile = () => {
               border: "1px solid #DCDCDC",
               marginTop: "10px",
               paddingLeft: "15px",
-              marginBottom:'10x'
+              marginBottom:'13px'
             }}
             placeholder="College"
             type="text"

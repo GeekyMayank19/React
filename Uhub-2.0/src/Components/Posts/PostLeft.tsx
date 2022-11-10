@@ -1,7 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Post from "./Post";
 
 const PostLeft = () => {
+  const navigate = useNavigate();
   return (
     <div
       style={{
@@ -11,7 +13,7 @@ const PostLeft = () => {
         padding: "10px",
       }}
     >
-      {/* <div
+      <div
         style={{
           display: "flex",
           flexDirection: "row",
@@ -33,10 +35,11 @@ const PostLeft = () => {
             width: "60px",
             fontWeight: "700px",
           }}
+          onClick={() => navigate("/addpost")}
         >
           Post
         </button>
-      </div> */}
+      </div>
       <Post />
       <Post />
       <Post />

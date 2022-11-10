@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthContext";
 import "./LeftMenu.css";
 import ProfileMenu from "./ProfileMenu";
@@ -8,6 +8,7 @@ const LeftMenu = () => {
   const [isActive, setIsActive] = useState(false);
   const location = useLocation();
   const authContext = useContext(AuthContext);
+  const navigate = useNavigate();
   // authContext.isLoggedIn
   // console.log(authContext);
   return (
@@ -38,6 +39,7 @@ const LeftMenu = () => {
             backgroundColor:
               location.pathname === "/home" ? "#E3E6E8" : "white",
           }}
+          onClick={() => navigate("/home")}
         >
           Home
         </div>

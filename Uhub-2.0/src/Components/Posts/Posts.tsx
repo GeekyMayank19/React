@@ -6,7 +6,7 @@ const Posts = () => {
   return (
     <div
       style={{
-        border: "1px solid black",
+        // border: "1px solid black",
         display: "flex",
         justifyContent: "center",
         padding: "10px",
