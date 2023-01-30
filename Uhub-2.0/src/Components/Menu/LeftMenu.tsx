@@ -9,8 +9,6 @@ const LeftMenu = () => {
   const location = useLocation();
   const authContext = useContext(AuthContext);
   const navigate = useNavigate();
-  // authContext.isLoggedIn
-  // console.log(authContext);
   return (
     <div
       style={{
@@ -36,8 +34,7 @@ const LeftMenu = () => {
             padding: "8px",
             fontSize: "14px",
             fontWeight: "600",
-            backgroundColor:
-              location.pathname === "/home" ? "#E3E6E8" : "white",
+            backgroundColor: location.pathname === "/home" ? "#E3E6E8" : "",
           }}
           onClick={() => navigate("/home")}
         >
@@ -58,7 +55,7 @@ const LeftMenu = () => {
 
         <PublicMenu />
 
-        {authContext.isLoggedIn && (
+        {authContext?.isLoggedIn && (
           <div>
             <div
               className="home-icon"
@@ -66,11 +63,20 @@ const LeftMenu = () => {
                 padding: "8px",
                 fontSize: "14px",
                 fontWeight: "600",
-                // background: isActive ? "#E3E6E8" : "white",
+                background:
+                  location.pathname === "/profile" ||
+                  location.pathname === "/addpost"
+                    ? "#E3E6E8"
+                    : "",
                 marginTop: "2px",
               }}
               onClick={() => {
-                setIsActive(!isActive);
+                if (
+                  location.pathname !== "/profile" &&
+                  location.pathname !== "/addpost"
+                ) {
+                  setIsActive(!isActive);
+                }
               }}
             >
               User

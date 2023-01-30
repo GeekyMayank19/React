@@ -7,7 +7,7 @@ import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { AuthContext } from "../../Context/AuthContext";
 import { userService } from "../../Services";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IUserRegisterData } from "../../Interface";
 
 type UserSubmitForm = {
@@ -18,6 +18,7 @@ type UserSubmitForm = {
 
 const Register = () => {
   const authContext = useContext(AuthContext);
+  const navigate = useNavigate();
   const validationSchema = Yup.object().shape({
     fullname: Yup.string().required("Fullname is required"),
     email: Yup.string().required("Email is required").email("Email is invalid"),
@@ -35,7 +36,14 @@ const Register = () => {
     resolver: yupResolver(validationSchema),
   });
   const onSubmit = (data: IUserRegisterData) => {
-    userService.register(data);
+    userService.signup(data).subscribe((res) => {
+      console.log("res->", res)
+      if(res.status===201){
+        navigate('/home')
+      
+        // authContext.setToken(res.)
+      }
+    });
   };
 
   return (

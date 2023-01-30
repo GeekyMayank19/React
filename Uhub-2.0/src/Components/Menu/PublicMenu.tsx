@@ -1,6 +1,5 @@
 import React from "react";
 
-
 const PublicMenu = () => {
   return (
     <div>
@@ -11,6 +10,7 @@ const PublicMenu = () => {
           fontSize: "13px",
           marginLeft: "10px",
           borderRadius: "1px solid black",
+          marginTop: "2px",
         }}
       >
         Notes

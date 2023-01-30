@@ -7,30 +7,43 @@ const ProfileMenu = () => {
   return (
     <div>
       <div
-        className="profile-menu home-icon"
+        className="public-menu home-icon"
         style={{
           padding: "8px",
           fontSize: "13px",
           marginLeft: "10px",
           borderRadius: "1px solid black",
-          background: location.pathname === "/profile" ? "#E3E6E8" : "white",
+          background: location.pathname === "/profile" ? "#E3E6E8" : "",
+          marginTop: "2px",
         }}
         onClick={() => navigate("/profile")}
       >
         Profile
       </div>
-      <div
-        className="profile-menu home-icon"
-        style={{ padding: "8px", fontSize: "13px", marginLeft: "10px" ,marginTop:"1px"}}
+      {/* <div
+        className="public-menu home-icon"
+        style={{
+          padding: "8px",
+          fontSize: "13px",
+          marginLeft: "10px",
+          marginTop: "1px",
+        }}
       >
         My Posts
-      </div>
-      {/* <div
-        className="profile-menu home-icon"
-        style={{ padding: "8px", fontSize: "13px", marginLeft: "10px" }}
-      >
-        Ebooks
       </div> */}
+      <div
+        className="public-menu home-icon"
+        style={{
+          padding: "8px",
+          fontSize: "13px",
+          marginLeft: "10px",
+          marginTop: "2px",
+          background: location.pathname === "/addpost" ? "#E3E6E8" : "",
+        }}
+        onClick={() => navigate("/addpost")}
+      >
+        Post
+      </div>
     </div>
   );
 };

@@ -5,9 +5,9 @@ import * as Yup from "yup";
 import GoogleIcon from "@mui/icons-material/Google";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import url from "../../utility/urls";
 import { AuthContext } from "../../Context/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { userService } from "../../Services";
 
 type UserSubmitForm = {
   email: string;
@@ -16,6 +16,7 @@ type UserSubmitForm = {
 };
 const Login = () => {
   const authContext = useContext(AuthContext);
+  const navigate = useNavigate();
   const validationSchema = Yup.object().shape({
     email: Yup.string().required("Email is required").email("Email is invalid"),
     password: Yup.string()
@@ -31,10 +32,14 @@ const Login = () => {
   } = useForm<UserSubmitForm>({
     resolver: yupResolver(validationSchema),
   });
-  const onSubmit = (data: UserSubmitForm) => {
-    console.log(JSON.stringify(data, null, 2));
-    console.log(authContext.isLoggedIn);
-    authContext.login();
+  const onSubmit = async (data: UserSubmitForm) => {
+    userService.login(data).subscribe((res) => {
+      if(res.status===201){
+        navigate('/home')
+        authContext?.setToken(res.response.token);
+        authContext?.setIsLoggedIn(true);
+      }
+    });
   };
 
   return (
