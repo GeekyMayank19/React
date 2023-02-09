@@ -1,15 +1,4 @@
 import React, { useState, createContext, FC } from "react";
-import { IUserRegisterData } from "../Interface";
-import url from "../utility/urls";
-type Response = {
-  localId: string;
-  email: string;
-  displayName: string;
-  idToken: string;
-  registered: string;
-  refreshToken: string;
-  expiresIn: string;
-};
 interface IAuthContext {
   token: string;
   isLoggedIn: boolean;

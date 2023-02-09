@@ -34,14 +34,14 @@ const Login = () => {
   });
   const onSubmit = async (data: UserSubmitForm) => {
     userService.login(data).subscribe((res) => {
-      if(res.status===201){
+      console.log('res->',res);
+      if(res.status===200){
         navigate('/home')
         authContext?.setToken(res.response.token);
         authContext?.setIsLoggedIn(true);
       }
     });
   };
-
   return (
     <div
       style={{
